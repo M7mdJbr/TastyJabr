@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TastyJabr — The Chef's Notebook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container">
+        
+        <header class="search-section">
+            <h1>TastyJabr.</h1>
+            <p>Curated Culinary Recipes & Visual Journal</p>
+            
+            <div class="search-box">
+                <input type="text" id="recipe-input" placeholder="Search ingredient or dish (e.g., Chicken, Beef, Pasta)..." autocomplete="off">
+                <button id="search-btn">Search</button>
+            </div>
+        </header>
+
+        <section class="filter-section">
+            <button class="filter-btn active" data-category="Cake">All Sweets</button>
+            <button class="filter-btn" data-category="Beef">Beef</button>
+            <button class="filter-btn" data-category="Chicken">Chicken</button>
+            <button class="filter-btn" data-category="Fish">Fish</button>
+            <button class="filter-btn" data-category="Salad">Salads</button>
+            <button class="filter-btn" data-category="Pasta">Pasta</button>
+        </section>
+
+        <section class="recipes-container" id="recipes-grid">
+            </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>3rd Javascript project with coffee by <span class="ibnJabr">ibnJabr</span></p>
+    </footer>
+
+    <div class="modal-overlay" id="recipe-modal">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="close-modal">✕</button>
+            <div id="modal-details">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap');
+
+:root {
+    --bg-notebook: #fdfbf7;    
+    --text-ink: #1a1f2c;        
+    --text-muted: #6e7787;      
+    --accent-terracotta: #c95a42;
+    --accent-sage: #5f7461;     
+    --card-border: 1px solid #1a1f2c;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-notebook);
+    color: var(--text-ink);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-section {
+    text-align: center;
+    border-bottom: 2px solid var(--text-ink);
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+}
+
+.search-section h1 {
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.search-section p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.search-box {
+    margin-top: 2.5rem;
+    display: inline-flex;
+    width: 100%;
+    max-width: 600px;
+    border-bottom: 2px solid var(--text-ink); 
+}
+
+#recipe-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px;
+    font-size: 1.2rem;
+    color: var(--text-ink);
+    font-family: var(--font-sans);
+}
+
+#recipe-input:focus {
+    outline: none;
+}
+
+#recipe-input::placeholder {
+    color: #b2b9c5;
+    font-style: italic;
+}
+
+#search-btn {
+    background: transparent;
+    border: none;
+    padding: 0 1.5rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-ink);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#search-btn:hover {
+    color: var(--accent-terracotta);
+}
+
+.filter-section {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-ink);
+    cursor: pointer;
+    padding: 5px 10px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--text-ink);
+    transition: width 0.3s ease;
+}
+
+.filter-btn:hover::after, .filter-btn.active::after {
+    width: 100%;
+}
+
+.filter-btn:hover {
+    color: var(--accent-terracotta);
+}
+
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 3rem; 
+}
+
+.recipe-card {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border: var(--card-border);
+    margin-bottom: 1.2rem;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(15%);
+    transition: filter 0.3s, transform 0.5s;
+}
+
+.recipe-card:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+.recipe-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-ink);
+}
+
+.recipe-card .category-tag {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-sage);
+    font-weight: 700;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(26, 31, 44, 0.7); 
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--bg-notebook);
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    border: 2px solid var(--text-ink);
+    padding: 3rem;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-ink);
+}
+
+.modal-recipe-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================
+   ☕ تنسيق الفوتر الكرييتف (App Footer)
+   ========================================================== */
+.app-footer {
+    text-align: center;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 1px dashed var(--text-ink);
+}
+
+.app-footer p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .search-section h1 {
+        font-size: 3rem;
+    }
+
+    .search-section {
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .filter-section {
+        gap: 0.8rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+        font-size: 0.9rem;
+    }
+
+    .recipes-container {
+        gap: 2rem;
+    }
+
+    .image-wrapper {
+        height: 280px;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+}
+.ibnJabr{
+    font-weight: bold;
+    color: var(--accent-terracotta);
+}
