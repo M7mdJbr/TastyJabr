@@ -56,7 +56,7 @@ TastyJabr/
 
 ---
 
-*Handcrafted during highly focused development intervals by **ibnJabr**.* 🚀
+*Handcrafted during highly focused development intervals by **M7mdJbr**.* 🚀
 
 ```
 
